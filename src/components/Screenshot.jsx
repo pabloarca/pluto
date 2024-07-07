@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import Spinner from './Spinner'; // Asegúrate de importar el componente Spinner
 
 const Screenshot = () => {
   const [link, setLink] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleStoreLink = async () => {
+    setIsLoading(true); // Mostrar el spinner
+    setImageUrl(''); // Limpiar cualquier imagen anterior
     try {
       const response = await fetch('https://plutonode-service-bhkd7zhacq-no.a.run.app/screenshot', { // Reemplaza con la URL de tu servidor
         method: 'POST',
@@ -21,39 +25,38 @@ const Screenshot = () => {
       const blob = await response.blob();
       const imageObjectUrl = URL.createObjectURL(blob);
       setImageUrl(imageObjectUrl);
-      alert('Screenshot taken successfully');
     } catch (error) {
       console.error('Error taking screenshot:', error);
-      alert('Error taking screenshot');
+    } finally {
+      setIsLoading(false); // Ocultar el spinner
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-5 text-center">Página Privada</h2>
-        <p className="text-center mb-5">Introduce el link de la página web que quieres almacenar:</p>
-        <div className="mb-4">
-          <input
-            type="url"
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Introduce el link de la página web"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-          />
-        </div>
+    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+      <h2 className="text-2xl font-bold mb-5 text-center">Página Privada</h2>
+      <p className="text-center mb-5">Introduce el link de la página web que quieres almacenar:</p>
+      <div className="flex mb-4 w-full max-w-lg">
+        <input
+          type="url"
+          className="flex-grow p-2 border border-gray-300 rounded-l"
+          placeholder="Introduce el link de la página web"
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
+        />
         <button
           onClick={handleStoreLink}
-          className="w-full bg-blue-500 text-white p-2 rounded mt-4"
+          className="p-2 bg-blue-500 text-white rounded-r"
         >
           Almacenar
         </button>
-        {imageUrl && (
-          <div className="mt-5 text-center">
-            <img src={imageUrl} alt="Screenshot" className="max-w-full h-auto" />
-          </div>
-        )}
       </div>
+      {isLoading && <Spinner />} {/* Mostrar el spinner si isLoading es true */}
+      {imageUrl && (
+        <div className="flex justify-start w-full mt-5">
+          <img src={imageUrl} alt="Screenshot" className="max-w-1/2 h-auto" />
+        </div>
+      )}
     </div>
   );
 };
