@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
-import { storeLink } from '../firebase'; // Asegúrate de crear esta función en firebase.js
 
 const Screenshot = () => {
   const [link, setLink] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleStoreLink = async () => {
     try {
-      await storeLink(link);
-      alert('Link almacenado con éxito');
-      setLink(''); // Limpiar el campo de entrada después de almacenar
+      const response = await fetch('https://pluto-screenshotserver.vercel.app/screenshot', { // URL de tu servidor en Vercel
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: link }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to take screenshot');
+      }
+
+      const blob = await response.blob();
+      const imageObjectUrl = URL.createObjectURL(blob);
+      setImageUrl(imageObjectUrl);
+      alert('Screenshot taken successfully');
     } catch (error) {
-      console.error('Error al almacenar el link:', error);
-      alert('Error al almacenar el link');
+      console.error('Error taking screenshot:', error);
+      alert('Error taking screenshot');
     }
   };
 
@@ -35,6 +48,11 @@ const Screenshot = () => {
         >
           Almacenar
         </button>
+        {imageUrl && (
+          <div className="mt-5 text-center">
+            <img src={imageUrl} alt="Screenshot" className="max-w-full h-auto" />
+          </div>
+        )}
       </div>
     </div>
   );
