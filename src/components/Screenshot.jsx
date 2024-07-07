@@ -6,7 +6,7 @@ const Screenshot = () => {
 
   const handleStoreLink = async () => {
     try {
-      const response = await fetch('https://pluto-screenshotserver.vercel.app/screenshot', { // URL de tu servidor en Vercel
+      const response = await fetch('https://plutonode-service-bhkd7zhacq-no.a.run.app/screenshot', { // Reemplaza con la URL de tu servidor
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
