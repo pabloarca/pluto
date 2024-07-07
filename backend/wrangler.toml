@@ -1,0 +1,5 @@
+name = "backend"
+main = "src/index.js"  # Asegúrate de que este sea el nombre del archivo principal
+compatibility_date = "2024-07-07"  # Ajusta esto a la fecha actual
+
+account_id = ""
