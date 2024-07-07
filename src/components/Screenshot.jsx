@@ -10,7 +10,7 @@ const Screenshot = () => {
     setIsLoading(true); // Mostrar el spinner
     setImageUrl(''); // Limpiar cualquier imagen anterior
     try {
-      const response = await fetch('https://pluto-screenshotserver.vercel.app/screenshot', { // URL de tu servidor
+      const response = await fetch('https://plutonode-service-bhkd7zhacq-no.a.run.app/screenshot', { // URL de tu servidor
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
