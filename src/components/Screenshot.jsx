@@ -52,11 +52,17 @@ const Screenshot = () => {
         </button>
       </div>
       {isLoading && <Spinner />} {/* Mostrar el spinner si isLoading es true */}
-      {imageUrl && (
-        <div className="flex justify-center w-full mt-5">
-          <img src={imageUrl} alt="Screenshot" className="w-32 h-auto border border-gray-300 shadow-lg" /> {/* Miniatura */}
+      <div className="flex w-full mt-5">
+        {imageUrl && (
+          <div className="flex-shrink-0 w-1/2 pr-4">
+            <img src={imageUrl} alt="Screenshot" className="w-full h-auto border border-gray-300 shadow-lg" /> {/* Miniatura */}
+          </div>
+        )}
+        <div className="flex-grow">
+          <p>Aquí puedes presentar el texto a la derecha de la miniatura.</p>
+          <p>Por ejemplo, una descripción o cualquier otra información relevante.</p>
         </div>
-      )}
+      </div>
     </div>
   );
 };
