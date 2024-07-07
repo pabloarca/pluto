@@ -10,7 +10,7 @@ const Screenshot = () => {
     setIsLoading(true); // Mostrar el spinner
     setImageUrl(''); // Limpiar cualquier imagen anterior
     try {
-      const response = await fetch('https://plutonode-service-bhkd7zhacq-no.a.run.app/screenshot', { // Reemplaza con la URL de tu servidor
+      const response = await fetch('https://pluto-screenshotserver.vercel.app/screenshot', { // URL de tu servidor
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,8 +53,8 @@ const Screenshot = () => {
       </div>
       {isLoading && <Spinner />} {/* Mostrar el spinner si isLoading es true */}
       {imageUrl && (
-        <div className="flex justify-start w-full mt-5">
-          <img src={imageUrl} alt="Screenshot" className="max-w-1/2 h-auto" />
+        <div className="flex justify-center w-full mt-5">
+          <img src={imageUrl} alt="Screenshot" className="w-32 h-auto border border-gray-300 shadow-lg" /> {/* Miniatura */}
         </div>
       )}
     </div>
