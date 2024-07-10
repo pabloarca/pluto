@@ -3,3 +3,7 @@ main = "src/index.js"  # Asegúrate de que este sea el nombre del archivo princi
 compatibility_date = "2024-07-07"  # Ajusta esto a la fecha actual
 
 account_id = ""
+
+[vars]
+OPENAI_API_KEY = "sk-proj-7gRkJkANwVACgX0nBDMFT3BlbkFJthC1MgR4NW2CcwySE9nu"
+

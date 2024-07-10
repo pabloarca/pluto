@@ -90,7 +90,7 @@ const Screenshot = () => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
       <h2 className="text-2xl font-bold mb-5 text-center">Plutonode</h2>
-      <p className="text-center mb-5">Introduce el link de la página web que quieres que analicemos:</p>
+      <p className="text-center mb-5">Introduce el link de la página web que quieres que analizamos:</p>
       <div className="flex mb-4 w-full max-w-lg">
         <input
           type="url"

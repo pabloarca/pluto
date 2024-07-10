@@ -1,5 +1,3 @@
-
-
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })
@@ -15,7 +13,7 @@ async function handleRequest(request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer sk-proj-7gRkJkANwVACgX0nBDMFT3BlbkFJthC1MgR4NW2CcwySE9nu`
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: "gpt-4o",
@@ -42,9 +40,9 @@ async function handleRequest(request) {
     return new Response(JSON.stringify(result), {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // Permitir todas las solicitudes de origen
-        'Access-Control-Allow-Methods': 'POST', // Permitir solo el método POST
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization' // Permitir encabezados específicos
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
       }
     });
   } catch (error) {
@@ -52,9 +50,9 @@ async function handleRequest(request) {
     return new Response(JSON.stringify({ error: error.message }), {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // Permitir todas las solicitudes de origen
-        'Access-Control-Allow-Methods': 'POST', // Permitir solo el método POST
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization' // Permitir encabezados específicos
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
       },
       status: 500
     });
