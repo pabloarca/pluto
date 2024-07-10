@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore"; // Importar Firestore y funciones necesarias
+import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -11,19 +13,10 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app); // Inicializar Firestore
+const storage = getStorage(app);
+const firestore = getFirestore(app);
 
-// Función para almacenar el link en Firestore
-const storeLink = async (link) => {
-  const user = auth.currentUser;
-  if (!user) {
-    throw new Error('No user logged in');
-  }
-
-  const linkRef = doc(db, 'users', user.uid); // Documento del usuario actual
-  await setDoc(linkRef, { link }, { merge: true });
-};
-
-export { auth, storeLink };
+export { auth, storage, firestore };
